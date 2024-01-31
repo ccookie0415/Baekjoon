@@ -1,10 +1,21 @@
-import collections
-
 def solution(participant, completion):
-    answer = []
+    answer = ''
+    part_dict = {}
     
-    answer = collections.Counter(participant) - collections.Counter(completion)
+    for i in participant:
+        if i not in part_dict:
+            part_dict[i] = 1
+            
+        else:
+            part_dict[i] += 1
+            
+    for j in completion:
+        if j in part_dict:
+            part_dict[j] -= 1
     
-    return list(answer)[0]
-                   
-                   
+    for key,value in part_dict.items():
+        if value != 0:
+            for k in range(value):
+                answer += key
+    
+    return answer
